@@ -1,13 +1,14 @@
-# 🏛️ Tenant Rights & Lease Enforcer AI Assistant
+
+# Tenant Rights & Lease Enforcer AI Assistant
 
 A privacy-first, statute-grounded LegalTech RAG application designed to analyze residential lease agreements, classify tenant disputes, and generate legally compliant demand notices enforced by regional statutory frameworks.
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
 * **Privacy-First Hybrid PII Extraction:** Combines local Regex pattern matching for property addresses and targeted LLM snippet passes for landlord names, ensuring sensitive user details never leak.
-* **Deterministic Statute Grounding:** Overcomes standard LLM hallucinations by using a Python post-processing guardrail (`enforce_output_guardrails`) that blocks obsolete laws and strictly enforces active regional legislation (e.g., *Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act, 2017*).
+* **Deterministic Statute Grounding:** Overcomes standard LLM hallucinations by using a Python post-processing guardrail (`enforce_output_guardrails`) that blocks obsolete laws and strictly enforces active regional legislation (e.g., Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act, 2017).
 * **Supervised Intent Routing:** Utilizes a classical machine learning classifier (`TfidfVectorizer` + `LogisticRegression`) in `prefilter.py` to instantly categorize natural-language tenant complaints into structured legal taxonomy buckets.
 * **Semantic Vector Retrieval (RAG):** Ingests digital PDFs via PyMuPDF or scanned stamp papers via Tesseract OCR, storing dense vector embeddings locally in volatile, session-isolated ChromaDB collections (`lease_{session_id}`).
 * **High-Speed LPU Inference:** Powered by Groq LPUs hosting open-weights Qwen 27B for sub-2-second response generation.
@@ -15,7 +16,7 @@ A privacy-first, statute-grounded LegalTech RAG application designed to analyze 
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 * **Core Language:** Python 3.10+
 * **Frontend Dashboard:** Streamlit
@@ -26,7 +27,7 @@ A privacy-first, statute-grounded LegalTech RAG application designed to analyze 
 
 ---
 
-## 📊 System Architecture Pipeline
+## System Architecture Pipeline
 
 ```text
 [ User PDF Lease + Natural Language Complaint ]
@@ -74,8 +75,13 @@ A privacy-first, statute-grounded LegalTech RAG application designed to analyze 
 │  • Plain-Text Download & Session Wipe        │
 └──────────────────────────────────────────────┘
 
-##Project Structure
+```
 
+---
+
+## Project Structure
+
+```text
 ├── app.py              # Streamlit front-end interface and dashboard
 ├── agent.py            # Groq LPU integration and output guardrails
 ├── rag.py              # Document ingestion, OCR, and ChromaDB vector store
@@ -84,3 +90,58 @@ A privacy-first, statute-grounded LegalTech RAG application designed to analyze 
 ├── run_app.bat         # Windows quick-launch script
 ├── requirements.txt    # Project Python dependencies
 └── .gitignore          # Excludes venv, .env, and local vector DBs
+
+```
+
+---
+
+## Local Installation & Setup
+
+1. **Clone the Repository:**
+```bash
+git clone [https://github.com/YourUsername/tenant-rights-app.git](https://github.com/YourUsername/tenant-rights-app.git)
+cd tenant-rights-app
+
+```
+
+
+2. **Create and Activate a Virtual Environment:**
+```bash
+python -m venv venv
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+
+```
+
+
+3. **Install Dependencies:**
+```bash
+pip install -r requirements.txt
+
+```
+
+
+4. **Configure Environment Variables:**
+Create a `.env` file in the root directory and add your Groq API key:
+```env
+GROQ_API_KEY=your_actual_groq_api_key_here
+
+```
+
+
+5. **Run the Application:**
+```bash
+streamlit run app.py
+# Or double-click run_app.bat on Windows
+
+```
+
+
+
+---
+
+## Author
+
+Developed and architected entirely as an independent end-to-end NLP project focusing on secure, privacy-compliant legal automation.
